@@ -395,3 +395,70 @@ public:
 };
 ```
 
+### 动态规划
+
+#### 连续子数组的最大和
+
+```c++
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int size = nums.size();
+        int pre = 0;
+        int maxAns = nums[0];
+        for(int i=0;i<size;i++){
+            pre = max(nums[i],pre+nums[i]);
+            maxAns = max(maxAns,pre);
+        }
+        return maxAns;
+    }
+};
+```
+
+#### 礼物的最大价值
+
+```c++
+class Solution {
+public:
+    int maxValue(vector<vector<int>>& grid) {
+        const int rows = grid.size();
+        const int cols = grid[0].size();
+        for(int j=1;j < cols;j++){
+            grid[0][j] = grid[0][j-1] + grid[0][j];
+        }
+        for(int i=1;i < rows;i++){
+            grid[i][0] = grid[i-1][0] + grid[i][0];
+        }
+        for(int i=1;i < rows;i++){
+            for(int j=1;j< cols;j++){
+                grid[i][j] = max(grid[i-1][j],grid[i][j-1]) + grid[i][j];
+            }
+        }
+        return grid[rows-1][cols-1];
+    }
+};
+```
+
+#### 把数字翻译成字符串，滚动数组优化
+
+```c++
+public:
+    int translateNum(int num) {
+    string nums = to_string(num);
+    int second = 0,first = 0,r = 1;
+    for(int i=0;i<nums.size();i++){
+        second = first;
+        first = r;
+        r = 0;
+        r += first;
+        if(i == 0) continue;
+        int num1 = (int)(nums[i-1] - '0');
+        int num2 = (int)(nums[i] - '0');
+        if(num1*10 + num2 <= 25 && num1*10 + num2 >=10 ){
+            r += second;
+        }
+    }
+    return r;}
+};
+```
+
