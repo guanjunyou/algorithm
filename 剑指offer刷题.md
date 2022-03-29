@@ -1,4 +1,4 @@
-
+ 
 
 ## 剑指offer刷题记录
 
@@ -9,6 +9,8 @@
 ### 栈与队列
 
 #### 用两个栈实现队列
+
+- [x] 二刷
 
 ```c++
 class CQueue {
@@ -48,6 +50,8 @@ public:
 ```
 
 #### 包含min函数的栈（编译失败）
+
+- [ ] 二刷
 
 ```c++
 class MinStack {
@@ -94,7 +98,7 @@ public:
 
 #### 队列的最大值
 
-
+- [x] 二刷
 
 ```c++
 class MaxQueue {
@@ -123,7 +127,7 @@ public:
         q. pop();
         if(d.front() == ans) d.pop_front();
         return ans;
-    }
+    
 };
 
 /**
@@ -136,6 +140,8 @@ public:
 ```
 
 #### 丑数（小顶堆+set判重）
+
+- [x] 二刷
 
 ```c++
 class Solution {
@@ -163,11 +169,34 @@ public:
 };
 ```
 
+dp法
+
+```c++
+class Solution {
+public:
+    int nthUglyNumber(int n) {
+        int a = 0,b = 0,c = 0;
+        int dp[n];
+        dp[0] = 1;
+        for(int i=1;i<n;i++){
+            int n2=dp[a]*2,n3=dp[b]*3,n5=dp[c]*5;
+            dp[i] = min(min(n2,n3),n5);
+            if(dp[i] == n2) a++;
+            if(dp[i] == n3) b++;
+            if(dp[i] == n5) c++; 
+        }
+        return dp[n-1];
+    }
+};
+```
+
 
 
 ### 链表
 
 #### 从头到尾打印链表
+
+- [x] 二刷
 
 ```c++
 /**
@@ -201,6 +230,8 @@ public:
 
 #### 反转链表
 
+- [x] 二刷
+
 ```c++
 /**
  * Definition for singly-linked list.
@@ -218,6 +249,7 @@ public:
         while(cur) {
             ListNode *tmp = cur -> next;
             cur -> next = pre;
+            //cur->pre = tmp;
             pre = cur;
             cur = tmp;
         }
@@ -227,7 +259,39 @@ public:
 };
 ```
 
+递归做法：
+
+```c++
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        if(head == NULL)
+            return NULL;
+        if(!head->next)
+            return head;
+        ListNode* newHead = reverseList(head->next);
+        head->next->next = head;
+        head->next = NULL;
+        return newHead;
+    }
+};
+```
+
+
+
 #### 删除链表的节点
+
+- [x] 二刷
 
 ```c++
 /**
@@ -260,6 +324,8 @@ public:
 ```
 
 #### 链表中倒数第k个节点
+
+- [x] 二刷
 
 ```c++
 class Solution {
@@ -324,6 +390,8 @@ public:
 
 #### 合并两个排序的链表
 
+- [ ] 二刷
+
 ```c++
 /**
  * Definition for singly-linked list.
@@ -366,6 +434,8 @@ public:
 ```
 
 #### 复杂链表的复制(超时代码)
+
+- [ ] 二刷
 
 ```c++
 /*
@@ -434,6 +504,8 @@ public:
 
 #### 替换空格
 
+- [ ] 二刷
+
 ```c++
 class Solution {
 public:
@@ -473,6 +545,8 @@ public:
 
 #### 在排序数组中查找数字 I（二分查找）
 
+- [ ] 二刷
+
 ```c++
 class Solution {
 public:
@@ -504,6 +578,8 @@ public:
 
 #### 查找0~n-1中缺失的数字（二分，哈希）
 
+- [ ] 二刷
+
 ```c++
 class Solution {
 public:
@@ -527,6 +603,8 @@ public:
 
 #### 二维数组中查找
 
+- [ ] 二刷
+
 ```c++
 class Solution {
 public:
@@ -549,6 +627,8 @@ public:
 ```
 
 #### 数组中的逆序对（二分，归并排序）
+
+- [ ] 二刷
 
 时间复杂度：nlogn  空间复杂度： n
 
@@ -592,6 +672,8 @@ private:
 
 #### 从上到下打印二叉树 I（BFS）
 
+- [ ] 二刷
+
 ```c++
 /**
  * Definition for a binary tree node.
@@ -627,6 +709,8 @@ public:
 ```
 
 #### 从上到下打印二叉树 II
+
+- [ ] 二刷
 
 ```c++
 /**
@@ -666,6 +750,8 @@ public:
 ```
 
 #### 从上到下打印二叉树 III
+
+- [ ] 二刷
 
 ```c++
 /**
@@ -713,6 +799,8 @@ public:
 
 #### 二叉树的深度（dfs)
 
+- [ ] 二刷
+
 ```c++
 /**
  * Definition for a binary tree node.
@@ -743,6 +831,8 @@ public:
 ```
 
 #### 对称的二叉树（中序遍历的做法）（未AC）
+
+- [ ] 二刷
 
 ```c++
 /**
@@ -790,6 +880,8 @@ public:
 ```
 
 #### 对称二叉树（二叉树镜像做法）
+
+- [ ] 二刷
 
 空间和时间复杂度太大
 
@@ -847,6 +939,8 @@ public:
 
 #### 二叉搜索树第k大结点
 
+- [ ] 二刷
+
 ```c++
 /**
  * Definition for a binary tree node.
@@ -874,6 +968,8 @@ public:
 ```
 
 #### 判断是否为平衡二叉树
+
+- [ ] 二刷
 
 ```c++
 /**
@@ -906,6 +1002,8 @@ public:
 ```
 
 #### 通过后序遍历判断是否为二叉搜索树
+
+- [ ] 二刷
 
 ```c++
 class Solution {
@@ -943,6 +1041,8 @@ public:
 ```
 
 #### 二叉树中和为某一值的路径
+
+- [ ] 二刷
 
 ```c++
 /**
@@ -985,6 +1085,8 @@ public:
 ```
 
 #### 二叉搜索树于双向链表
+
+- [ ] 二刷
 
 ```c++
 /*
@@ -1037,6 +1139,8 @@ public:
 ```
 
 #### 重建二叉树（RE代码）
+
+- [ ] 二刷
 
 ```c++
 /**
@@ -1094,6 +1198,8 @@ public:
 
 #### 树的子结构
 
+- [ ] 二刷
+
 ```c++
 /**
  * Definition for a binary tree node.
@@ -1146,6 +1252,8 @@ public:
 
 #### 连续子数组的最大和
 
+- [ ] 二刷
+
 ```c++
 class Solution {
 public:
@@ -1163,6 +1271,8 @@ public:
 ```
 
 #### 礼物的最大价值
+
+- [ ] 二刷
 
 ```c++
 class Solution {
@@ -1188,6 +1298,8 @@ public:
 
 #### 把数字翻译成字符串，滚动数组优化
 
+- [ ] 二刷
+
 ```c++
 public:
     int translateNum(int num) {
@@ -1211,6 +1323,8 @@ public:
 
 #### 剪绳子
 
+- [ ] 二刷
+
 ```c++
 class Solution {
 public:
@@ -1233,6 +1347,8 @@ public:
 
 #### 股票的最大价值
 
+- [ ] 二刷
+
 ```c++
 class Solution {
 public:
@@ -1249,6 +1365,8 @@ public:
 ```
 
 #### 第n个丑数
+
+- [ ] 二刷
 
 ```c++
 class Solution {
